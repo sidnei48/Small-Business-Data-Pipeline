@@ -98,7 +98,7 @@ A estrutura poderá ser ajustada durante o desenvolvimento conforme novas necess
 
 ## Como executar
 1. Clonar o repositório
-git clone https://github.com/SEU-USUARIO/small-business-data-pipeline.git
+git clone https://github.com/sidnei48/small-business-data-pipeline.git
 
 2. Acessar o diretório
 cd small-business-data-pipeline
