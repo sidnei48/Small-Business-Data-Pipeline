@@ -6,7 +6,7 @@ ARQUIVO = "data/raw/AlunosTurma.xlsx"
 
 df = pd.read_excel(
     ARQUIVO,
-    sheet_name="Sheet",
+    sheet_name=0,
     header=None
 )
 
