@@ -8,6 +8,7 @@ def inserir_professores(professores):
     sql = """
         INSERT INTO professor (nome)
         VALUES (%s)
+        ON CONFLICT (nome) DO NOTHING
     """
 
     for nome in professores:
@@ -16,6 +17,179 @@ def inserir_professores(professores):
             (nome,)
         )
 
+    conn.commit()
+
+    cursor.close()
+    conn.close()
+
+def buscar_ids_professores():
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    sql = """
+        SELECT id_professor, nome
+        FROM professor
+    """
+
+    cursor.execute(sql)
+    resultados = cursor.fetchall()
+
+    ids_professores = {
+        nome: id_professor
+        for id_professor, nome in resultados
+    }
+
+    cursor.close()
+    conn.close()
+
+    return ids_professores
+
+def inserir_turmas(turmas):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    sql = """
+        INSERT INTO turma (
+            nivel_livro,
+            idioma,
+            tipo_turma,
+            dia_semana,
+            horario_inicio,
+            capacidade_maxima,
+            id_professor
+        )
+        VALUES (%s, %s, %s, %s, %s, %s, %s)
+        ON CONFLICT (
+            nivel_livro,
+            idioma,
+            tipo_turma,
+            dia_semana,
+            horario_inicio,
+            id_professor
+        ) 
+        DO UPDATE SET
+            capacidade_maxima = EXCLUDED.capacidade_maxima
+        """
+
+    for turma in turmas.itertuples(index=False):
+        cursor.execute(
+            sql,
+            (
+                turma.nivel_livro,
+                turma.idioma,
+                turma.tipo_turma,
+                turma.dia_semana,
+                turma.horario_inicio,
+                turma.capacidade_maxima,
+                turma.id_professor
+            )
+        )
+    conn.commit()
+
+    cursor.close()
+    conn.close()
+
+def inserir_alunos(alunos_unicos):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    sql = """
+        INSERT INTO aluno (
+            id_aluno,
+            nome
+        )
+        VALUES (%s, %s)
+        ON CONFLICT (id_aluno)
+        DO UPDATE SET
+            nome = EXCLUDED.nome
+        """
+
+    for aluno in alunos_unicos.itertuples(index=False):
+        cursor.execute(
+            sql,
+            (
+                aluno.codigo,
+                aluno.nome
+            )
+        )
+    conn.commit()
+
+    cursor.close()
+    conn.close()
+
+def buscar_ids_turmas():
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    sql = """
+        SELECT
+            id_turma,
+            nivel_livro,
+            idioma,
+            tipo_turma,
+            dia_semana,
+            horario_inicio,
+            id_professor
+        FROM turma
+    """
+
+    cursor.execute(sql)
+
+    resultados = cursor.fetchall()
+
+    ids_turmas = {
+    (
+        nivel_livro,
+        idioma,
+        tipo_turma,
+        dia_semana,
+        horario_inicio.strftime("%H:%M"),
+        id_professor
+    ): id_turma
+    for (
+        id_turma,
+        nivel_livro,
+        idioma,
+        tipo_turma,
+        dia_semana,
+        horario_inicio,
+        id_professor
+    ) in resultados
+    }
+
+    cursor.close()
+    conn.close()
+
+    return ids_turmas
+
+def inserir_matriculas(matriculas):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    sql = """
+        INSERT INTO matricula (
+            id_aluno,
+            id_turma,
+            situacao
+        )
+        VALUES (%s, %s, %s)
+        ON CONFLICT (
+            id_aluno,
+            id_turma
+        )
+        DO UPDATE SET
+            situacao = EXCLUDED.situacao
+        """
+
+    for matricula in matriculas.itertuples(index=False):
+        cursor.execute(
+            sql,
+            (
+                matricula.codigo,
+                matricula.id_turma,
+                matricula.situacao
+            )
+        )
     conn.commit()
 
     cursor.close()
