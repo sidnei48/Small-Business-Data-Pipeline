@@ -25,7 +25,7 @@ O projeto busca demonstrar como técnicas de Engenharia de Dados podem ser utili
 - Visual Studio Code - Ambiente de desenvolvimento
 
 ## Pipeline
-O pipeline será desenvolvido seguindo as etapas de ETL:
+O pipeline foi desenvolvido seguindo as etapas de ETL:
 
 1. Extração
 Os dados serão coletados a partir das fontes definidas para o projeto, como arquivos CSV, planilhas ou APIs.
@@ -52,13 +52,15 @@ Os dados serão disponibilizados no Power BI por meio de um dashboard com indica
 ## Dashboard
 O dashboard terá como objetivo apresentar informações relevantes para apoiar a gestão do pequeno negócio.
 Entre os indicadores que poderão ser apresentados estão:
-Faturamento;
-Quantidade de vendas;
-Produtos mais vendidos;
-Desempenho das vendas;
-Clientes;
-Ticket médio;
-Indicadores de estoque.
+- Matrículas ativas
+- Matrículas canceladas
+- Quantidade de alunos
+- Quantidade de alunos ativos
+- Média de alunos por turma
+- Ocupação das turmas
+- Alunos por professor
+- Turmas por tipo
+- Distribuição de matrículas por situação
 
 Status: 🚧 Em desenvolvimento
 
@@ -122,14 +124,15 @@ python src/main.py
 Observação: os comandos e configurações poderão ser atualizados conforme o desenvolvimento do projeto.
 
 ## Resultados
-Ao final do projeto, espera-se obter um pipeline funcional capaz de:
-Coletar dados;
-Realizar o tratamento e a transformação;
-Armazenar os dados de forma estruturada;
-Executar consultas para análise;
-Gerar indicadores;
-Disponibilizar informações por meio de um dashboard;
-Apoiar a tomada de decisões em pequenos negócios.
+O projeto resultou em um pipeline ETL funcional capaz de:
+
+- Extrair dados de uma planilha Excel;
+- Tratar e padronizar os dados utilizando Python e Pandas;
+- Remover duplicidades e validar informações;
+- Armazenar os dados em um banco PostgreSQL estruturado;
+- Executar consultas SQL para análise;
+- Gerar indicadores sobre alunos, matrículas e turmas;
+- Disponibilizar as informações em um dashboard no Power BI.
 
 ## Autor
 Sidnei
