@@ -1,10 +1,15 @@
 import os
 
 import psycopg
+
 from dotenv import load_dotenv
 
+
+# Carrega as variáveis de ambiente do arquivo .env
 load_dotenv()
 
+
+# Cria e retorna uma conexão com o PostgreSQL
 def get_connection():
     return psycopg.connect(
         host=os.getenv("DB_HOST"),
