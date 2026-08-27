@@ -1,57 +1,88 @@
 # Apoio à gestão de pequenos negócios
- 
+
 ## Sobre o projeto
-O Small Business Data Pipeline é um projeto de Engenharia de Dados desenvolvido com o objetivo de organizar, processar e disponibilizar dados de pequenos negócios para apoiar a gestão e a tomada de decisões.
-O projeto propõe o desenvolvimento de um pipeline capaz de realizar a coleta, transformação, armazenamento e análise dos dados, transformando informações brutas em dados estruturados e úteis para o negócio.
+
+O Small Business Data Pipeline é um projeto de Engenharia de Dados desenvolvido com o objetivo de organizar, processar e disponibilizar dados de um pequeno negócio para apoiar a gestão e a tomada de decisões.
+
+Neste projeto, foi utilizado como cenário uma escola de idiomas, utilizando informações relacionadas a alunos, professores, turmas e matrículas.
+
+O projeto implementa um pipeline capaz de realizar a extração, transformação, armazenamento e análise dos dados, transformando informações brutas de uma planilha em dados estruturados e disponíveis para análise.
 
 ## Objetivo
+
 Desenvolver um pipeline de Engenharia de Dados capaz de coletar, tratar, armazenar e disponibilizar informações gerenciais para auxiliar a tomada de decisão em um pequeno negócio.
 
 ## Contexto
-Pequenos negócios frequentemente possuem dados relacionados a vendas, clientes, produtos, serviços, estoque e faturamento, porém essas informações podem estar dispersas em diferentes arquivos ou sistemas.
-O projeto busca demonstrar como técnicas de Engenharia de Dados podem ser utilizadas para organizar essas informações e gerar indicadores que auxiliem o gestor na análise do negócio.
+
+Pequenos negócios frequentemente armazenam informações importantes em planilhas e arquivos pouco estruturados, dificultando a organização, análise e utilização desses dados.
+
+Neste projeto, foi utilizada como fonte de dados uma planilha de uma escola de idiomas contendo informações sobre alunos, professores, turmas e matrículas.
+
+O projeto busca demonstrar como técnicas de Engenharia de Dados podem ser utilizadas para transformar esses dados brutos em informações estruturadas e indicadores úteis para a gestão.
 
 ## Arquitetura
-<img width="1086" height="1448" alt="image" src="https://github.com/user-attachments/assets/a277a10b-0ce1-41d4-aea1-91ee3928d593" />
+
+<img width="1086" height="1448" alt="Arquitetura do projeto" src="https://github.com/user-attachments/assets/a277a10b-0ce1-41d4-aea1-91ee3928d593" />
 
 ## Tecnologias
+
 - Python - Desenvolvimento do pipeline
-- Pandas - Manipulação e transformação dos dados
+- Pandas - Manipulação, limpeza e transformação dos dados
 - PostgreSQL - Armazenamento dos dados
-- SQL - Consultas e análise dos dados
+- SQL - Criação das tabelas, consultas e análise dos dados
+- Psycopg - Comunicação entre Python e PostgreSQL
+- Python-dotenv - Gerenciamento das variáveis de ambiente
+- OpenPyXL - Leitura dos arquivos Excel
 - Power BI - Visualização e criação do dashboard
 - Git - Controle de versão
 - GitHub - Hospedagem do código e documentação
 - Visual Studio Code - Ambiente de desenvolvimento
 
+## Ferramentas de apoio
+
+- Notion - Organização das fases, tarefas e acompanhamento do desenvolvimento
+- Inteligência Artificial - Apoio na revisão de código, explicação de conceitos, documentação e validação das etapas do projeto
+
 ## Pipeline
+
 O pipeline foi desenvolvido seguindo as etapas de ETL:
 
 1. Extração
-Os dados serão coletados a partir das fontes definidas para o projeto, como arquivos CSV, planilhas ou APIs.
+
+Os dados são extraídos de uma planilha Excel utilizando Python e Pandas.
 
 2. Transformação
-Os dados serão tratados utilizando Python e Pandas, incluindo:
-Remoção de dados duplicados;
-Tratamento de valores nulos;
-Padronização de informações;
-Correção de tipos de dados;
-Padronização de datas;
-Criação de novas informações;
-Validação dos dados.
+
+Os dados são tratados utilizando Python e Pandas, incluindo:
+
+- Remoção de dados duplicados;
+- Tratamento de valores nulos;
+- Padronização de nomes e informações;
+- Correção de tipos de dados;
+- Identificação de alunos, professores e turmas;
+- Padronização de dias e horários;
+- Classificação dos tipos de turma;
+- Validação das matrículas;
+- Criação de novas informações utilizadas durante o processamento.
 
 3. Carga
-Após o tratamento, os dados serão armazenados em um banco de dados PostgreSQL.
+
+Após o tratamento, os dados são armazenados em um banco de dados PostgreSQL estruturado nas tabelas de professores, turmas, alunos e matrículas.
 
 4. Análise
-Consultas SQL serão utilizadas para analisar os dados e gerar informações relevantes para o negócio.
+
+Consultas SQL são utilizadas para validar os dados e gerar informações relevantes para a análise das matrículas e turmas.
 
 5. Visualização
-Os dados serão disponibilizados no Power BI por meio de um dashboard com indicadores gerenciais.
+
+Os dados armazenados no PostgreSQL são utilizados no Power BI para criação de um dashboard com indicadores e filtros interativos.
 
 ## Dashboard
-O dashboard terá como objetivo apresentar informações relevantes para apoiar a gestão do pequeno negócio.
-Entre os indicadores que poderão ser apresentados estão:
+
+O dashboard apresenta informações relevantes para apoiar a análise das turmas e matrículas da escola.
+
+Entre os indicadores apresentados estão:
+
 - Matrículas ativas
 - Matrículas canceladas
 - Quantidade de alunos
@@ -62,77 +93,120 @@ Entre os indicadores que poderão ser apresentados estão:
 - Turmas por tipo
 - Distribuição de matrículas por situação
 
-Status: 🚧 Em desenvolvimento
-
 ## Estrutura do projeto
-A estrutura do projeto será organizada da seguinte forma:
 
+A estrutura do projeto está organizada da seguinte forma:
+
+```text
 small-business-data-pipeline/
 │
 ├── data/
-│   ├── raw/
-│   └── processed/
+│   └── raw/
 │
 ├── src/
+│   ├── config/
 │   ├── extraction/
 │   ├── transformation/
 │   ├── loading/
+│   ├── utils/
 │   └── main.py
 │
 ├── sql/
 │   ├── tables/
 │   └── queries/
 │
-├── dashboard/
+├── powerbi/
+│   └── bussines_small.pbix
 │
 ├── docs/
-│   ├── arquitetura/
-│   ├── banco-de-dados/
-│   └── pipeline/
+│   ├── arquitetura.md
+│   ├── banco-de-dados.md
+│   ├── pipeline.md
+│   └── tecnologias.md
 │
 ├── tests/
+│   └── data/
 │
+├── logs/
+│   └── pipeline.log
+│
+├── .env.example
 ├── .gitignore
 ├── requirements.txt
 └── README.md
-
-A estrutura poderá ser ajustada durante o desenvolvimento conforme novas necessidades surgirem.
+```
 
 ## Como executar
+
 1. Clonar o repositório
-git clone https://github.com/sidnei48/small-business-data-pipeline.git
+
+```bash
+git clone https://github.com/sidnei48/Small-Business-Data-Pipeline.git
+```
 
 2. Acessar o diretório
-cd small-business-data-pipeline
+
+```bash
+cd Small-Business-Data-Pipeline
+```
 
 3. Criar o ambiente virtual
+
+```bash
 python -m venv .venv
+```
 
 4. Ativar o ambiente virtual
+
 Windows PowerShell:
-.venv\Scripts\Activate.ps1
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
 
 5. Instalar as dependências
+
+```bash
 pip install -r requirements.txt
+```
 
 6. Configurar o PostgreSQL
-Criar o banco de dados e configurar as informações de conexão conforme a documentação do projeto.
 
-7. Executar o pipeline
+Criar o banco de dados e configurar as informações de conexão utilizando as variáveis de ambiente.
+
+O arquivo `.env.example` pode ser utilizado como referência para a configuração.
+
+7. Criar as tabelas
+
+Executar os scripts SQL disponíveis em:
+
+```text
+sql/tables/
+```
+
+8. Executar o pipeline
+
+```bash
 python src/main.py
+```
 
-Observação: os comandos e configurações poderão ser atualizados conforme o desenvolvimento do projeto.
+Após a execução, os dados tratados serão armazenados no PostgreSQL e estarão disponíveis para consultas SQL e visualização no Power BI.
 
 ## Resultados
+
 O projeto resultou em um pipeline ETL funcional capaz de:
 
 - Extrair dados de uma planilha Excel;
 - Tratar e padronizar os dados utilizando Python e Pandas;
 - Remover duplicidades e validar informações;
+- Organizar dados de alunos, professores, turmas e matrículas;
 - Armazenar os dados em um banco PostgreSQL estruturado;
-- Executar consultas SQL para análise;
+- Atualizar registros já existentes no banco;
+- Registrar as execuções através de logs;
+- Executar consultas SQL para análise e validação;
 - Gerar indicadores sobre alunos, matrículas e turmas;
-- Disponibilizar as informações em um dashboard no Power BI.
+- Disponibilizar as informações em um dashboard interativo no Power BI.
 
 ## Autor
+
 Sidnei
