@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Small Business Data Pipeline</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="hero">
+    <div class="hero-content">
+        <p class="hero-tag">Projeto de Engenharia de Dados</p>
+
+        <h1>Small Business Data Pipeline</h1>
+
+        <p class="hero-description">
+            Pipeline ETL desenvolvido para transformar dados brutos em informações
+            estruturadas e úteis para análise e tomada de decisão.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="#dashboard" class="btn btn-primary">
+                Ver Dashboard
+            </a>
+
+            <a
+                href="https://github.com/sidnei48/Small-Business-Data-Pipeline"
+                class="btn btn-secondary"
+                target="_blank"
+            >
+                Ver GitHub
+            </a>
+        </div>
+    </div>
+    </header>
+
+    <main>
+
+    <section class="about">
+        <div class="section-container">
+
+            <p class="section-tag">Sobre o projeto</p>
+
+            <h2>Transformando dados brutos em informação útil</h2>
+
+            <p class="section-description">
+                Este projeto foi criado para transformar informações espalhadas
+                em uma planilha em dados mais organizados, fáceis de analisar
+                e úteis para o dia a dia de uma empresa.
+            </p>
+
+            <p class="section-description">
+                No exemplo utilizado, os dados de uma escola de idiomas são
+                organizados para facilitar a visualização de informações sobre
+                alunos, professores, turmas e matrículas.
+            </p>
+
+        </div>
+    </section>
+
+    <section class="flow">
+    <div class="section-container">
+
+        <p class="section-tag">Como funciona</p>
+
+        <h2>Do dado bruto até a visualização</h2>
+
+        <div class="flow-steps">
+
+            <div class="flow-card">
+                <h3>1. Planilha</h3>
+                <p>
+                    Os dados começam em uma planilha com informações da escola.
+                </p>
+            </div>
+
+            <div class="flow-card">
+                <h3>2. Tratamento</h3>
+                <p>
+                    As informações são organizadas, corrigidas e preparadas para análise.
+                </p>
+            </div>
+
+            <div class="flow-card">
+                <h3>3. Banco de dados</h3>
+                <p>
+                    Os dados tratados são armazenados de forma estruturada e segura.
+                </p>
+            </div>
+
+            <div class="flow-card">
+                <h3>4. Dashboard</h3>
+                <p>
+                    As informações ficam disponíveis em gráficos e indicadores interativos.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+    </section>
+
+    <section class="dashboard-section" id="dashboard">
+    <div class="section-container">
+
+        <p class="section-tag">Dashboard</p>
+
+        <h2>Explore os dados de forma interativa</h2>
+
+        <p class="section-description">
+            Utilize os filtros e gráficos para analisar informações sobre
+            alunos, matrículas, professores e turmas.
+        </p>
+
+        <div class="dashboard-content">
+            <div class="dashboard-cards">
+
+            <div class="dashboard-card">
+                <p>Matrículas Ativas</p>
+                <h3 id="matriculas-ativas">751</h3>
+            </div>
+
+            <div class="dashboard-card">
+                <p>Matrículas Canceladas</p>
+                <h3 id="matriculas-canceladas">38</h3>
+            </div>
+
+            <div class="dashboard-card">
+                <p>Alunos Ativos</p>
+                <h3 id="alunos-ativos">742</h3>
+            </div>
+
+            <div class="dashboard-card">
+                <p>Média de Alunos por Turma</p>
+                <h3 id="media-alunos">5.91</h3>
+            </div>
+
+            </div>
+        </div>
+
+    </div>
+    </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
