@@ -1,4 +1,6 @@
-psycopg[binary]
-python-dotenv
 pandas
 openpyxl
+psycopg[binary]
+python-dotenv
+fastapi
+uvicorn

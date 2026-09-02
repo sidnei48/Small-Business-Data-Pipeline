@@ -8,177 +8,230 @@
     <title>Small Business Data Pipeline</title>
 
     <link rel="stylesheet" href="style.css">
+
+    <!-- Biblioteca usada para criar os gráficos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
 
+    <!-- Apresentação inicial do projeto -->
     <header class="hero">
-    <div class="hero-content">
-        <p class="hero-tag">Projeto de Engenharia de Dados</p>
+        <div class="hero-content">
 
-        <h1>Small Business Data Pipeline</h1>
+            <p class="hero-tag">
+                Projeto de Engenharia de Dados
+            </p>
 
-        <p class="hero-description">
-            Pipeline ETL desenvolvido para transformar dados brutos em informações
-            estruturadas e úteis para análise e tomada de decisão.
-        </p>
+            <h1>Small Business Data Pipeline</h1>
 
-        <div class="hero-buttons">
-            <a href="#dashboard" class="btn btn-primary">
-                Ver Dashboard
-            </a>
+            <p class="hero-description">
+                Pipeline ETL desenvolvido para transformar dados brutos em informações
+                estruturadas e úteis para análise e tomada de decisão.
+            </p>
 
-            <a
-                href="https://github.com/sidnei48/Small-Business-Data-Pipeline"
-                class="btn btn-secondary"
-                target="_blank"
-            >
-                Ver GitHub
-            </a>
+            <div class="hero-buttons">
+
+                <a href="#dashboard" class="btn btn-primary">
+                    Ver Dashboard
+                </a>
+
+                <a
+                    href="https://github.com/sidnei48/Small-Business-Data-Pipeline"
+                    class="btn btn-secondary"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Ver GitHub
+                </a>
+
+            </div>
         </div>
-    </div>
     </header>
 
     <main>
 
-    <section class="about">
-        <div class="section-container">
+        <!-- Explicação simples sobre o projeto -->
+        <section class="about">
+            <div class="section-container">
 
-            <p class="section-tag">Sobre o projeto</p>
+                <p class="section-tag">Sobre o projeto</p>
 
-            <h2>Transformando dados brutos em informação útil</h2>
+                <h2>Transformando dados brutos em informação útil</h2>
 
-            <p class="section-description">
-                Este projeto foi criado para transformar informações espalhadas
-                em uma planilha em dados mais organizados, fáceis de analisar
-                e úteis para o dia a dia de uma empresa.
-            </p>
-
-            <p class="section-description">
-                No exemplo utilizado, os dados de uma escola de idiomas são
-                organizados para facilitar a visualização de informações sobre
-                alunos, professores, turmas e matrículas.
-            </p>
-
-        </div>
-    </section>
-
-    <section class="flow">
-    <div class="section-container">
-
-        <p class="section-tag">Como funciona</p>
-
-        <h2>Do dado bruto até a visualização</h2>
-
-        <div class="flow-steps">
-
-            <div class="flow-card">
-                <h3>1. Planilha</h3>
-                <p>
-                    Os dados começam em uma planilha com informações da escola.
+                <p class="section-description">
+                    Este projeto foi criado para transformar informações espalhadas
+                    em uma planilha em dados mais organizados, fáceis de analisar
+                    e úteis para o dia a dia de uma empresa.
                 </p>
-            </div>
 
-            <div class="flow-card">
-                <h3>2. Tratamento</h3>
-                <p>
-                    As informações são organizadas, corrigidas e preparadas para análise.
+                <p class="section-description">
+                    No exemplo utilizado, os dados de uma escola de idiomas são
+                    organizados para facilitar a visualização de informações sobre
+                    alunos, professores, turmas e matrículas.
                 </p>
-            </div>
 
-            <div class="flow-card">
-                <h3>3. Banco de dados</h3>
-                <p>
-                    Os dados tratados são armazenados de forma estruturada e segura.
+            </div>
+        </section>
+
+        <!-- Mostra de forma simples como os dados passam pelo projeto -->
+        <section class="flow">
+            <div class="section-container">
+
+                <p class="section-tag">Como funciona</p>
+
+                <h2>Do dado bruto até a visualização</h2>
+
+                <div class="flow-steps">
+
+                    <div class="flow-card">
+                        <h3>1. Planilha</h3>
+
+                        <p>
+                            Os dados começam em uma planilha com informações da escola.
+                        </p>
+                    </div>
+
+                    <div class="flow-card">
+                        <h3>2. Tratamento</h3>
+
+                        <p>
+                            As informações são organizadas, corrigidas e preparadas para análise.
+                        </p>
+                    </div>
+
+                    <div class="flow-card">
+                        <h3>3. Banco de dados</h3>
+
+                        <p>
+                            Os dados tratados são armazenados de forma estruturada e segura.
+                        </p>
+                    </div>
+
+                    <div class="flow-card">
+                        <h3>4. Dashboard</h3>
+
+                        <p>
+                            As informações ficam disponíveis em gráficos e indicadores interativos.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard conectado aos dados do projeto -->
+        <section class="dashboard-section" id="dashboard">
+            <div class="section-container">
+
+                <p class="section-tag">Dashboard</p>
+
+                <h2>Explore os dados de forma interativa</h2>
+
+                <p class="section-description">
+                    Utilize os filtros e gráficos para analisar informações sobre
+                    alunos, matrículas, professores e turmas.
                 </p>
+
+                <div class="dashboard-content">
+
+                    <!-- Filtros -->
+                    <div class="dashboard-filters">
+
+                        <div class="filter-group">
+                            <label for="filtro-professor">
+                                Professor
+                            </label>
+
+                            <select id="filtro-professor">
+                                <option value="">Todos</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label for="filtro-idioma">
+                                Idioma
+                            </label>
+
+                            <select id="filtro-idioma">
+                                <option value="">Todos</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label for="filtro-tipo">
+                                Tipo de turma
+                            </label>
+
+                            <select id="filtro-tipo">
+                                <option value="">Todos</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <!-- Indicadores principais -->
+                    <div class="dashboard-cards">
+
+                        <div class="dashboard-card">
+                            <p>Matrículas Ativas</p>
+                            <h3 id="matriculas-ativas">--</h3>
+                        </div>
+
+                        <div class="dashboard-card">
+                            <p>Matrículas Canceladas</p>
+                            <h3 id="matriculas-canceladas">--</h3>
+                        </div>
+
+                        <div class="dashboard-card">
+                            <p>Alunos Ativos</p>
+                            <h3 id="alunos-ativos">--</h3>
+                        </div>
+
+                        <div class="dashboard-card">
+                            <p>Média de Alunos por Turma</p>
+                            <h3 id="media-alunos">--</h3>
+                        </div>
+
+                    </div>
+
+                    <!-- Gráfico de matrículas -->
+                    <div class="dashboard-chart">
+                        <h3>Matrículas por Situação</h3>
+
+                        <canvas id="grafico-matriculas"></canvas>
+                    </div>
+
+                    <!-- Gráfico de alunos por professor -->
+                    <div class="dashboard-chart">
+                        <h3>Alunos Ativos por Professor</h3>
+
+                        <canvas id="grafico-professores"></canvas>
+                    </div>
+
+                    <!-- Gráfico de turmas por tipo -->
+                    <div class="dashboard-chart">
+                        <h3>Turmas por Tipo</h3>
+
+                        <canvas id="grafico-tipos-turma"></canvas>
+                    </div>
+
+                    <!-- Gráfico de ocupação -->
+                    <div class="dashboard-chart">
+                        <h3>Ocupação das Turmas</h3>
+
+                        <canvas id="grafico-ocupacao"></canvas>
+                    </div>
+
+                </div>
             </div>
-
-            <div class="flow-card">
-                <h3>4. Dashboard</h3>
-                <p>
-                    As informações ficam disponíveis em gráficos e indicadores interativos.
-                </p>
-            </div>
-
-        </div>
-
-    </div>
-    </section>
-
-    <section class="dashboard-section" id="dashboard">
-    <div class="section-container">
-
-        <p class="section-tag">Dashboard</p>
-
-        <h2>Explore os dados de forma interativa</h2>
-
-        <p class="section-description">
-            Utilize os filtros e gráficos para analisar informações sobre
-            alunos, matrículas, professores e turmas.
-        </p>
-
-        <div class="dashboard-content">
-
-    <div class="dashboard-filters">
-
-        <div class="filter-group">
-            <label for="filtro-professor">Professor</label>
-
-            <select id="filtro-professor">
-                <option value="">Todos</option>
-            </select>
-        </div>
-
-        <div class="filter-group">
-            <label for="filtro-idioma">Idioma</label>
-
-            <select id="filtro-idioma">
-                <option value="">Todos</option>
-            </select>
-        </div>
-
-        <div class="filter-group">
-            <label for="filtro-tipo">Tipo de turma</label>
-
-            <select id="filtro-tipo">
-                <option value="">Todos</option>
-            </select>
-        </div>
-
-    </div>
-
-    <div class="dashboard-cards">
-
-        <div class="dashboard-card">
-            <p>Matrículas Ativas</p>
-            <h3 id="matriculas-ativas">751</h3>
-        </div>
-
-        <div class="dashboard-card">
-            <p>Matrículas Canceladas</p>
-            <h3 id="matriculas-canceladas">38</h3>
-        </div>
-
-        <div class="dashboard-card">
-            <p>Alunos Ativos</p>
-            <h3 id="alunos-ativos">742</h3>
-        </div>
-
-        <div class="dashboard-card">
-            <p>Média de Alunos por Turma</p>
-            <h3 id="media-alunos">5.91</h3>
-        </div>
-
-    </div>
-
-</div>
-
-    </div>
-    </section>
+        </section>
 
     </main>
 
+    <!-- Código JavaScript da página -->
     <script src="script.js"></script>
+
 </body>
 
 </html>
