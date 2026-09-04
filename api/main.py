@@ -1,4 +1,7 @@
+from pathlib import Path
+
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 
 from api.queries import (
     buscar_indicadores,
@@ -9,16 +12,22 @@ from api.queries import (
 )
 
 
-# Cria a API usada pelo dashboard
 app = FastAPI(
     title="Small Business Data Pipeline API",
     version="1.0.0"
 )
 
 
+# Localiza a pasta principal do projeto
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Localiza a pasta que contém HTML, CSS e JavaScript
+WEB_DIR = BASE_DIR / "web"
+
+
 # Rota usada para verificar se a API está funcionando
-@app.get("/")
-def home():
+@app.get("/status")
+def status():
     return {
         "mensagem": "API funcionando"
     }
@@ -84,3 +93,15 @@ def ocupacao_turmas(
         idioma,
         tipo_turma
     )
+
+
+# Disponibiliza os arquivos da pasta web
+# Deve permanecer depois das rotas da API
+app.mount(
+    "/",
+    StaticFiles(
+        directory=WEB_DIR,
+        html=True
+    ),
+    name="web"
+)

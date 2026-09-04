@@ -1,4 +1,4 @@
-const API_URL = "http://127.0.0.1:8000";
+const API_URL = "";
 
 let graficoMatriculas;
 let graficoProfessores;
@@ -8,31 +8,46 @@ let graficoOcupacao;
 
 // Pega os valores selecionados nos filtros
 function obterParametrosFiltros() {
-    const professor = document.getElementById("filtro-professor").value;
-    const idioma = document.getElementById("filtro-idioma").value;
-    const tipoTurma = document.getElementById("filtro-tipo").value;
+    const professor =
+        document.getElementById("filtro-professor").value;
+
+    const idioma =
+        document.getElementById("filtro-idioma").value;
+
+    const tipoTurma =
+        document.getElementById("filtro-tipo").value;
 
     const parametros = new URLSearchParams();
 
     if (professor) {
-        parametros.append("professor", professor);
+        parametros.append(
+            "professor",
+            professor
+        );
     }
 
     if (idioma) {
-        parametros.append("idioma", idioma);
+        parametros.append(
+            "idioma",
+            idioma
+        );
     }
 
     if (tipoTurma) {
-        parametros.append("tipo_turma", tipoTurma);
+        parametros.append(
+            "tipo_turma",
+            tipoTurma
+        );
     }
 
     return parametros;
 }
 
 
-// Monta a URL da API junto com os filtros escolhidos
+// Monta a URL da API com os filtros selecionados
 function montarUrl(endpoint) {
-    const parametros = obterParametrosFiltros();
+    const parametros =
+        obterParametrosFiltros();
 
     let url = `${API_URL}${endpoint}`;
 
@@ -44,7 +59,7 @@ function montarUrl(endpoint) {
 }
 
 
-// Faz a requisição e transforma a resposta em JSON
+// Faz uma requisição para a API
 async function buscarDados(url) {
     const resposta = await fetch(url);
 
@@ -58,21 +73,32 @@ async function buscarDados(url) {
 }
 
 
-// Busca e atualiza os indicadores principais
+// Busca os indicadores principais
 async function carregarIndicadores() {
-    const url = montarUrl("/indicadores");
-    const dados = await buscarDados(url);
+    const url =
+        montarUrl("/indicadores");
 
-    document.getElementById("matriculas-ativas").textContent =
+    const dados =
+        await buscarDados(url);
+
+    document
+        .getElementById("matriculas-ativas")
+        .textContent =
         dados.matriculas_ativas;
 
-    document.getElementById("matriculas-canceladas").textContent =
+    document
+        .getElementById("matriculas-canceladas")
+        .textContent =
         dados.matriculas_canceladas;
 
-    document.getElementById("alunos-ativos").textContent =
+    document
+        .getElementById("alunos-ativos")
+        .textContent =
         dados.alunos_ativos;
 
-    document.getElementById("media-alunos").textContent =
+    document
+        .getElementById("media-alunos")
+        .textContent =
         dados.media_alunos_turma;
 
     atualizarGraficoMatriculas(dados);
@@ -81,7 +107,10 @@ async function carregarIndicadores() {
 
 // Cria ou atualiza o gráfico de matrículas
 function atualizarGraficoMatriculas(dados) {
-    const canvas = document.getElementById("grafico-matriculas");
+    const canvas =
+        document.getElementById(
+            "grafico-matriculas"
+        );
 
     const valores = [
         dados.matriculas_ativas,
@@ -89,106 +118,150 @@ function atualizarGraficoMatriculas(dados) {
     ];
 
     if (graficoMatriculas) {
-        graficoMatriculas.data.datasets[0].data = valores;
+        graficoMatriculas
+            .data
+            .datasets[0]
+            .data = valores;
+
         graficoMatriculas.update();
 
         return;
     }
 
-    graficoMatriculas = new Chart(canvas, {
-        type: "bar",
+    graficoMatriculas =
+        new Chart(canvas, {
+            type: "bar",
 
-        data: {
-            labels: [
-                "Ativas",
-                "Canceladas"
-            ],
+            data: {
+                labels: [
+                    "Ativas",
+                    "Canceladas"
+                ],
 
-            datasets: [
-                {
-                    label: "Matrículas",
-                    data: valores,
-                    backgroundColor: [
-                        "#2563eb",
-                        "#9ca3af"
-                    ]
-                }
-            ]
-        },
+                datasets: [
+                    {
+                        label: "Matrículas",
+                        data: valores,
 
-        options: {
-            responsive: true,
+                        backgroundColor: [
+                            "#2563eb",
+                            "#9ca3af"
+                        ]
+                    }
+                ]
+            },
 
-            scales: {
-                y: {
-                    beginAtZero: true
+            options: {
+                responsive: true,
+
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
                 }
             }
-        }
-    });
+        });
 }
 
 
-// Preenche os filtros com os dados vindos do banco
+// Carrega as opções dos filtros
 async function carregarFiltros() {
-    const dados = await buscarDados(
-        `${API_URL}/filtros`
-    );
+    const dados =
+        await buscarDados(
+            `${API_URL}/filtros`
+        );
 
     const filtroProfessor =
-        document.getElementById("filtro-professor");
+        document.getElementById(
+            "filtro-professor"
+        );
 
     const filtroIdioma =
-        document.getElementById("filtro-idioma");
+        document.getElementById(
+            "filtro-idioma"
+        );
 
     const filtroTipo =
-        document.getElementById("filtro-tipo");
+        document.getElementById(
+            "filtro-tipo"
+        );
 
-    dados.professores.forEach(professor => {
-        const option = document.createElement("option");
 
-        option.value = professor;
-        option.textContent = professor;
+    dados.professores.forEach(
+        professor => {
+            const option =
+                document.createElement(
+                    "option"
+                );
 
-        filtroProfessor.appendChild(option);
-    });
+            option.value = professor;
+            option.textContent = professor;
 
-    dados.idiomas.forEach(idioma => {
-        const option = document.createElement("option");
+            filtroProfessor.appendChild(
+                option
+            );
+        }
+    );
 
-        option.value = idioma;
-        option.textContent = idioma;
 
-        filtroIdioma.appendChild(option);
-    });
+    dados.idiomas.forEach(
+        idioma => {
+            const option =
+                document.createElement(
+                    "option"
+                );
 
-    dados.tipos_turma.forEach(tipo => {
-        const option = document.createElement("option");
+            option.value = idioma;
+            option.textContent = idioma;
 
-        option.value = tipo;
-        option.textContent = tipo;
+            filtroIdioma.appendChild(
+                option
+            );
+        }
+    );
 
-        filtroTipo.appendChild(option);
-    });
+
+    dados.tipos_turma.forEach(
+        tipo => {
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+            option.value = tipo;
+            option.textContent = tipo;
+
+            filtroTipo.appendChild(
+                option
+            );
+        }
+    );
 }
 
 
-// Busca e atualiza o gráfico de alunos por professor
+// Busca alunos ativos por professor
 async function carregarGraficoProfessores() {
-    const url = montarUrl(
-        "/graficos/alunos-professor"
-    );
+    const url =
+        montarUrl(
+            "/graficos/alunos-professor"
+        );
 
-    const dados = await buscarDados(url);
+    const dados =
+        await buscarDados(url);
 
     const canvas =
-        document.getElementById("grafico-professores");
+        document.getElementById(
+            "grafico-professores"
+        );
 
     if (graficoProfessores) {
         graficoProfessores.data.labels =
             dados.professores;
 
-        graficoProfessores.data.datasets[0].data =
+        graficoProfessores
+            .data
+            .datasets[0]
+            .data =
             dados.alunos_ativos;
 
         graficoProfessores.update();
@@ -196,50 +269,64 @@ async function carregarGraficoProfessores() {
         return;
     }
 
-    graficoProfessores = new Chart(canvas, {
-        type: "bar",
+    graficoProfessores =
+        new Chart(canvas, {
+            type: "bar",
 
-        data: {
-            labels: dados.professores,
+            data: {
+                labels:
+                    dados.professores,
 
-            datasets: [
-                {
-                    label: "Alunos Ativos",
-                    data: dados.alunos_ativos,
-                    backgroundColor: "#2563eb"
-                }
-            ]
-        },
+                datasets: [
+                    {
+                        label:
+                            "Alunos Ativos",
 
-        options: {
-            responsive: true,
+                        data:
+                            dados.alunos_ativos,
 
-            scales: {
-                y: {
-                    beginAtZero: true
+                        backgroundColor:
+                            "#2563eb"
+                    }
+                ]
+            },
+
+            options: {
+                responsive: true,
+
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
                 }
             }
-        }
-    });
+        });
 }
 
 
-// Busca e atualiza o gráfico de turmas por tipo
+// Busca quantidade de turmas por tipo
 async function carregarGraficoTiposTurma() {
-    const url = montarUrl(
-        "/graficos/turmas-tipo"
-    );
+    const url =
+        montarUrl(
+            "/graficos/turmas-tipo"
+        );
 
-    const dados = await buscarDados(url);
+    const dados =
+        await buscarDados(url);
 
     const canvas =
-        document.getElementById("grafico-tipos-turma");
+        document.getElementById(
+            "grafico-tipos-turma"
+        );
 
     if (graficoTiposTurma) {
         graficoTiposTurma.data.labels =
             dados.tipos_turma;
 
-        graficoTiposTurma.data.datasets[0].data =
+        graficoTiposTurma
+            .data
+            .datasets[0]
+            .data =
             dados.quantidades;
 
         graficoTiposTurma.update();
@@ -247,55 +334,76 @@ async function carregarGraficoTiposTurma() {
         return;
     }
 
-    graficoTiposTurma = new Chart(canvas, {
-        type: "bar",
+    graficoTiposTurma =
+        new Chart(canvas, {
+            type: "bar",
 
-        data: {
-            labels: dados.tipos_turma,
+            data: {
+                labels:
+                    dados.tipos_turma,
 
-            datasets: [
-                {
-                    label: "Quantidade de Turmas",
-                    data: dados.quantidades,
-                    backgroundColor: "#2563eb"
-                }
-            ]
-        },
+                datasets: [
+                    {
+                        label:
+                            "Quantidade de Turmas",
 
-        options: {
-            responsive: true,
+                        data:
+                            dados.quantidades,
 
-            scales: {
-                y: {
-                    beginAtZero: true
+                        backgroundColor:
+                            "#2563eb"
+                    }
+                ]
+            },
+
+            options: {
+                responsive: true,
+
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
                 }
             }
-        }
-    });
+        });
 }
 
 
-// Busca e atualiza as turmas com maior ocupação
+// Busca as turmas com maior ocupação
 async function carregarGraficoOcupacao() {
-    const url = montarUrl(
-        "/graficos/ocupacao-turmas"
-    );
+    const url =
+        montarUrl(
+            "/graficos/ocupacao-turmas"
+        );
 
-    const dados = await buscarDados(url);
+    const dados =
+        await buscarDados(url);
 
     const turmas =
-        dados.turmas.slice(0, 15);
+        dados.turmas.slice(
+            0,
+            15
+        );
 
     const ocupacoes =
-        dados.ocupacoes.slice(0, 15);
+        dados.ocupacoes.slice(
+            0,
+            15
+        );
 
     const canvas =
-        document.getElementById("grafico-ocupacao");
+        document.getElementById(
+            "grafico-ocupacao"
+        );
 
     if (graficoOcupacao) {
-        graficoOcupacao.data.labels = turmas;
+        graficoOcupacao.data.labels =
+            turmas;
 
-        graficoOcupacao.data.datasets[0].data =
+        graficoOcupacao
+            .data
+            .datasets[0]
+            .data =
             ocupacoes;
 
         graficoOcupacao.update();
@@ -303,42 +411,51 @@ async function carregarGraficoOcupacao() {
         return;
     }
 
-    graficoOcupacao = new Chart(canvas, {
-        type: "bar",
+    graficoOcupacao =
+        new Chart(canvas, {
+            type: "bar",
 
-        data: {
-            labels: turmas,
+            data: {
+                labels: turmas,
 
-            datasets: [
-                {
-                    label: "Ocupação (%)",
-                    data: ocupacoes,
-                    backgroundColor: "#2563eb"
-                }
-            ]
-        },
+                datasets: [
+                    {
+                        label:
+                            "Ocupação (%)",
 
-        options: {
-            responsive: true,
+                        data:
+                            ocupacoes,
 
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    max: 100,
+                        backgroundColor:
+                            "#2563eb"
+                    }
+                ]
+            },
 
-                    ticks: {
-                        callback: function(valor) {
-                            return valor + "%";
+            options: {
+                responsive: true,
+
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+
+                        ticks: {
+                            callback:
+                                function(valor) {
+                                    return (
+                                        valor + "%"
+                                    );
+                                }
                         }
                     }
                 }
             }
-        }
-    });
+        });
 }
 
 
-// Atualiza todos os dados quando um filtro é alterado
+// Atualiza todos os indicadores e gráficos
 async function atualizarDashboard() {
     try {
         await Promise.all([
@@ -347,6 +464,7 @@ async function atualizarDashboard() {
             carregarGraficoTiposTurma(),
             carregarGraficoOcupacao()
         ]);
+
     } catch (erro) {
         console.error(
             "Erro ao atualizar dashboard:",
@@ -356,21 +474,30 @@ async function atualizarDashboard() {
 }
 
 
-// Liga os filtros à atualização do dashboard
+// Configura os eventos dos filtros
 function configurarEventos() {
-    document.getElementById("filtro-professor")
+    document
+        .getElementById(
+            "filtro-professor"
+        )
         .addEventListener(
             "change",
             atualizarDashboard
         );
 
-    document.getElementById("filtro-idioma")
+    document
+        .getElementById(
+            "filtro-idioma"
+        )
         .addEventListener(
             "change",
             atualizarDashboard
         );
 
-    document.getElementById("filtro-tipo")
+    document
+        .getElementById(
+            "filtro-tipo"
+        )
         .addEventListener(
             "change",
             atualizarDashboard
@@ -378,7 +505,7 @@ function configurarEventos() {
 }
 
 
-// Carrega o dashboard quando a página é aberta
+// Inicializa a aplicação
 async function iniciarDashboard() {
     try {
         await carregarFiltros();
@@ -386,6 +513,7 @@ async function iniciarDashboard() {
         configurarEventos();
 
         await atualizarDashboard();
+
     } catch (erro) {
         console.error(
             "Erro ao iniciar dashboard:",
